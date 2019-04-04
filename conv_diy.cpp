@@ -11,7 +11,7 @@ int your_conv( cv::Mat src, cv::Mat dst, cv::Mat kernel, int stride, int paddin 
     int kernel_width = kernel.cols;
  
     int dst_height = (src_height+2*paddin-kernel)/stride + 1;
-    int dst_width(src_width+2*paddin-kernel)/stride + 1;
+    int dst_width = (src_width+2*paddin-kernel)/stride + 1;
 
     // src.ptr<unsigned char>(i)[ calculate INDEX ]
      for(int i=0; i<dst_height; i++){
@@ -27,7 +27,7 @@ int your_conv( cv::Mat src, cv::Mat dst, cv::Mat kernel, int stride, int paddin 
      }
 
     // if success
-    return 0
+    return 0;
 
     // if fail - in the case of wrong parameters...
     // return -1
