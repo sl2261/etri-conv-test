@@ -2,25 +2,29 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
 
-int your_conv( cv::Mat src,
-               cv::Mat dst,
-               cv::Mat kernel,
-               int stride,
-               int padding
-               )
+int your_conv( cv::Mat src, cv::Mat dst, cv::Mat kernel, int stride, int paddin )
 {
     int src_height = src.rows;
     int src_width = src.cols;
 
     int kernel_height = kernel.rows;
     int kernel_width = kernel.cols;
-
-    int dst_height;
-    int dst_width;
+ 
+    int dst_height = (src_height+2*paddin-kernel)/stride + 1;
+    int dst_width(src_width+2*paddin-kernel)/stride + 1;
 
     // src.ptr<unsigned char>(i)[ calculate INDEX ]
-
-    // MAKE YOUR OWN CONVOLUTION PROCESS
+     for(int i=0; i<dst_height; i++){
+      for(int j=0; j<dst_width; j++){
+       for(int k=0; k<kernel_height; k++){
+        for(int l=0; l<kernel_width; l++){ 
+         dst.at<Vec3b>(i,j)[0] =dst.at<Vec3b>(i,j)[0]+ src.at<Vec3b>(l,k)[0]*kernel.at<Vec3b>(l+i,k+j)[0];
+         dst.at<Vec3b>(i,j)[1] =dst.at<Vec3b>(i,j)[1]+ src.at<Vec3b>(l,k)[1]*kernel.at<Vec3b>(l+i,k+j)[1];
+         dst.at<Vec3b>(i,j)[2] =dst.at<Vec3b>(i,j([2]+ src.at<Vec3b>(l,k)[2]*kernel.at<Vec3b>(l+i,k+j)[2];
+        }
+       }
+      }
+     }
 
     // if success
     return 0
